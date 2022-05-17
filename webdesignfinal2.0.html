@@ -1,0 +1,548 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+        <title>Gentle Salmon :: Bike flows in Chicago</title>
+        <script src='https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.js'></script>
+         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+         <link href='https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.css' rel='stylesheet'/>
+         <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+        <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js'></script>
+        <script type='text/javascript' src='http://code.jquery.com/jquery-1.10.2.min.js?ver=1.10.2'></script>
+        <link rel='stylesheet'
+          href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css'
+          type='text/css'/>
+        <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+        <link rel="stylesheet" media="all" href="./assets/application-1339a0aa860a91bb13afc5a1beb0f18cd1482ca987ff8f5b5ea2f88d05bf3602.css" />
+    </head>
+
+    <body>
+        <div id="root">
+            <div data-reactroot>
+                <section class = 'firstpage'>
+                    <div class="red-area">
+                        <header class="red" style="display: flex;">
+                            <div class="logo-menu">
+                                <img src="./assets/1.svg" alt="casa">
+                                <span id="alltitle">SHARING BIKE IN CHICAGO</span> 
+                                <span id="gentle_salmon_title">Gentle Salmon</span> 
+                                <span id="from">from</span>
+                            </div>
+                            <a href="https://www.ucl.ac.uk/" target="_blank">
+                                <img src="./assets/121.svg" alt="UCL">
+                            </a>
+                        </header>
+                        <div class="header-apple-box"></div>
+                        <div class="news-roller" style="height: 700px; display: block;">
+                            <div class="news-roller__msg" style="opacity: 1;">
+                                <div class="news-roller_shape">
+                                    <div class="news-roller__quote" style="opacity: 1; transform: translateY(0px);">
+                                        <p class="news-roller__title">
+                                         <!-- react-text: 20 -->“<!-- /react-text --><!-- react-text: 21 -->
+                                        I, Gentle Salmon, an environmentalist who loves riding sharing-bike, dream of protecting our cities from pollution. 
+                                        <br>
+                                        <br>
+                                        I would like to give some suggestions to the government, businesses, 
+                                        <br>
+                                        NGOs and others.
+                                         <!-- /react-text --><!-- react-text: 22 -->”<!-- /react-text -->
+                                         </p>
+                                        <div class="news-roller__person-area">
+                                            <div class="news-roller__line"></div>
+                                             <p class="news-roller__person">
+                                                 <span class="news-roller__author">Gentle Salmon</span>
+                                                <!-- react-text: 27 --> <!-- /react-text --> , a British gentleman lives in Chicago<!-- react-text: 28 --><!-- /react-text -->
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="news-roller__image" style="opacity: 0.65; transform: translateY(0px);">
+                                        <img src="./assets/bike_woman.jpg">
+                                    </div>
+                                    <div class="news-roller__salmon" style="opacity: 1; transform: translateY(0px);">
+                                        <img src="./assets/bike-sal-orange.png">
+                                    </div>
+                                </div>
+                                <div class="news-roller__btn-area">
+                                    <a href="javascript:void(0);" class="news-roller__vis-btn">
+                                        <img src="./assets/scroll_down_btn.svg">
+                                    <p class="news-roller__btn-desc">
+                                    <!-- react-text: 35 -->See<!-- /react-text --><br><!-- react-text: 37 -->Visualization<!-- /react-text -->
+                                    </p>
+                                </div>
+                            </div>  
+                        </div>
+                    </div>
+                    <div class="interactivemap0" >
+                        <div class="map-containersmall" style="width:100%; height: 700px; position: relative; cursor: -webkit-grab;">
+                            <div style="width:100%; height: 700px; position: relative;">
+                                <iframe width="100%" height="700px" src="./US-Chicago.html" frameborder="0" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <div class="interactivemap1" >
+                        <div class="map-containersmall" style="width:90%; height: 750px; position: relative; cursor: -webkit-grab;">
+                            <div style="width:100%; height: 700px; position: relative;">
+                                <div id='side_left' style="width: 100%; height:750px;float: left">
+                                <iframe width="100%" height="700" src="MAPBLUE_514.html"></iframe>
+                                <!-- <iframe width="100%" height="700" src="https://flowmap.blue/13tKV1LOR4CcLZhTxrnpxNvB40Jx7IVpRaT-vc2pvQ1U/embed?v=41.878982%2C-87.479105%2C10.00%2C0%2C0&a=1&as=1&b=1&bo=46&c=1&ca=0&cz=10&d=0&fe=1&lt=1&lfm=ALL&col=YlOrRd&f=0" frameborder="0" allowfullscreen></iframe> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="Question1" >
+                        <div class='Question1_figure_sal'>
+                             <img style= "width: 100%; height: 100%;" src="./assets/bg1.png" alt="bg1"  >
+                        </div>
+                        <div class="Qtext">
+                            <div class='Question1title'>
+                            Question 1:
+                            </div>
+                            <div class="Q1story1">
+                                <div class="Q1story1text">
+                                "Are you curious about the specific spatial
+                                 pattern of Chicago’s bike sharing system?"
+                                </div>
+                                <br>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="Q1story2">
+                        <div class="Q1story2text">
+                                Let’s explore it below.
+                                Click the buttons and stations on the map, you will find something surprised!
+                        </div>
+                    </div>
+                    
+                    <div class="interactivemap2">
+                        <div class="map-container" style="width:90%; height: 700px; position: relative; cursor: -webkit-grab;">
+                            <div style="width:100%; height: 700px; position: relative;">
+                                 <div id="regression" style="width: 100%; height:750px; float: left">
+                                     <iframe width="100%" height="700" src="MAP1_515.html"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="Q2-finding">
+                        <div class='Q2-pro-sal'>
+                            <img style= "width: 100%; height: 100%;" src="./assets/bg2.png" alt="bg2"  >
+                        </div>
+                        <div class='Q2text'>
+                            <div class="Q1story1">
+                                <div class="Q1story1text">
+                                <!-- react-text: 20 -->“<!-- /react-text --><!-- react-text: 21 -->
+                                Oh my friends, you must have found these if you are as smart as I am.
+                                <!-- react-text: 20 -->”<!-- /react-text --><!-- react-text: 21 -->
+                                 </div>
+                            </div>
+                            <div class='gap'>
+                                <div class='story-text'>
+                                Flows are strongly clustered in the city center, which has numerous commercial and entertainment areas.
+                                </div>
+                            </div>
+                            <div class='gap1'>
+                                <div class='story-text'>
+                                 There is also a small peak at the University of Chicago station, probably due to the higher density of visitors.
+                                </div>
+                            </div>
+                            <div class='gap2'>
+                                <div class='story-text'>
+                                There are 296 stations with greater inflows (attractiveness) and 229 stations with greater outflows (producticity).
+                                </div>
+                            </div>
+                        </div>
+                        <div class="Question2">
+                        <div class="Qtext">
+                            <div class='Question1title'>
+                            Question 2:
+                            </div>
+                            <div class="Q1story1">
+                                <div class="Q1story1text">
+                                "So… Why does it look like this?
+                                <br>
+                                Maybe because of the socio-economic factors!"
+                                </div>
+                                <br>
+                                <br>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="pie_chart">
+                        <div class="map-container" style="width:90%; height: 450px; position: relative; cursor: -webkit-grab;">
+                            <div style="width:100%; height: 450px; position: relative;">
+                                     <iframe width="100%" height="110%" src="charts.html"></iframe>
+                            
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="Question2" >
+                        <div class='Question1_figure_sal'>
+                             <img style= "width: 100%; height: 120%;" src="./assets/question-sal.png" alt="circle-bg"  >
+                        </div> -->
+                        <div class="Qtext">
+                            <div class='Question1title'>
+                            Question 2:
+                            </div>
+                            <div class="Q1story1">
+                                <div class="Q1story1text">
+                                "So… Why does it look like this?
+                                <br>
+                                Maybe because of the socio-economic factors!"
+                                </div>
+                                <br>
+                                <br>
+                            </div>
+                        </div>
+                    <!-- </div> -->
+
+
+                     <div class="Q1story2">
+                        <div class="Q1story2text">
+                        Try the slide, hover a bike station and find how they are related!                                
+                        </div>
+                    </div>
+
+                    <div class="interactivemap3">
+                        <div class="map-container" style="width:90%; height: 700px; position: relative; cursor: -webkit-grab;">
+                            <div style="width:100%; height: 700px; position: relative;">
+                                 <div id="regression" style="width: 100%; height:750px; float: left">
+                                     <iframe width="100%" height="700" src="MAP2_511.html"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="Q3finding">
+                        <div class='Q3find-figure'>
+                            <img style= "width: 100%; height: 100%;" src="./assets/bg3.png" alt="bg3"  >
+                        </div>
+                        <div class="nav-box">
+                            <div class="f3story">
+                            <div class="f3storytext">
+                                "You may be confused with these graphs… 
+                                But don’t worry, I’ll give you some tips!"
+                            </div>
+                            </div>
+                            <div id="nav-left">
+                                <div>
+                                <button id="Population_Density">Population Density</button>
+                                </div>
+                                <div>
+                                <button id="Car_Ownership">Car Ownership</button>
+                                </div>
+                                <div>
+                                <button id="Wage">Wage</button>
+                                </div>
+                                <div>
+                                <button id="Employment_Density">Employment Density</button>
+                                </div>
+                            </div>
+                            <div id="nav-right">
+                                <p id="change">When the population density is low, there will be many stations with large flows. As the population density increases, more medium-flow stations appear in the city center.</p>
+                            </div>
+                        </div> 
+                        <div class="Q3">
+                            <div class="Qtext">
+                                <div class='Question1title'>
+                                Question 3:
+                                </div>
+                                <div class="Q1story1">
+                                    <div class="Q3story1text">
+                                    Like I do, you might notice that limited results for these factors can be found in some areas... It's totally normal!
+                                    </div>
+                                <br>
+                                    <div class="Q1story1text">
+                                    So...How did it happen?
+                                    </div>
+                                </div>
+                                <br>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="Q1story2">
+                        <div class="Q1story2text">
+                            Let's switch to the K-means clustering method to continue the exploring.
+                         </div>
+                    </div>
+                    
+                    <br>
+                    <br>
+                    <br>
+
+                    <div class="clusteringresults">
+                        <div class="endwage">
+                          <img style= "width: 90%; height: 93%;" src="./assets/general.png" alt="circle-bg"  >
+                        </div>
+                      </div>
+                    
+                    <div class="Clusterfinding">
+                    <div class='C-figure'>
+                        <img style= "width: 100%; height: 100%;" src="./assets/bg4.png" alt="bg4"  >
+                    </div>
+                    <div class="nav-box2">
+                        <div class="f3story">
+                        <div class="f3storytext">
+                            "Wow!
+                            <br>
+                            There are some fancy results!"
+                        </div>
+                        </div>
+                        <div id="nav-left2">
+                            <div>
+                            <button id="Wage2">Wage</button>
+                            </div>
+                            <div>
+                            <button id="Car_Ownership2">Car Ownership</button>
+                            </div>
+                            <div>
+                            <button id="Job_Type2">Job Type</button>
+                            </div>
+                        </div>
+                        <div id="nav-right2">
+                            <div>
+                            <p id="change2">When flows in stations are high, the number of people with high wages is high. While people with lower wages are usually with medium flows on the outskirts.</p>
+                            <p id="change3">Comparing with start wage and end wage maps, the end wage map is more scattered, especially for those with medium and low wages. </p>
+                            
+                            </div>
+                            </div>
+                    </div>
+                    </div>
+
+                    <div class="red-area--reverse">
+                        <div class="container-advice">
+                            <div class="news-roller__advice">
+                                Advice for...
+                            </div>
+                            <!-- <div class="row"> -->
+                                <div class="column1" style="background-color: #F23C1A" alt="Avatar">
+                                    <div class="news-roller__sugg">
+                                    Government
+                                    </div>
+                                    <div class="overlay1" >
+                                        <div class="sug_list">
+                                            <ul>
+                                                <li>Conduct initiations to encourage enterprise to put bicycles in the suburbs.</li><br><br>
+                                                <li>Improve cycle lanes and regulate traffic rules, especially on routes with high use of shared bicycles.</li><br><br>
+                                                <li>Control the price of sharing bikes.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column2" style="background-color: #F23C1A" alt="Avatar">
+                                    <p class="news-roller__sugg">
+                                    Companies
+                                    </p>
+                                    <div class="overlay2">
+                                        <div class="sug_list">
+                                            <ul>
+                                                <li style="font-weight: 700px"> Put more bikes on the suburb area.</li><br><br>
+                                                <li> Put more bikes in area with high employment density, especially for service and office industry.</li><br><br>
+                                                <li> Set different price in different areas. For some areas with low income people gathering, the price could be lower with some conditions.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column3" style="background-color: #F23C1A" alt="Avatar">
+                                    <p class="news-roller__sugg">
+                                        NGOs and Others
+                                    </p>
+                                    <div class="overlay3">
+                                        <div class="sug_list">
+                                            <ul>
+                                                <li> Propoganda to med/low income people, cars owners, people who are in industrial, entertainment and retail industries.</li><br><br>
+                                                <li> Actively support to governments about policy making of bike sharing.</li><br><br>
+                                                <li> Researchers could pay more attention on research considering socio economic factors based on above results.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        <p id="introduction">Who Are Gentle Salmons?</p>
+                        <div>
+                            <img src="assets\team.png" alt="ourteam" style="width: 100%;">
+                        </div>
+
+                        <div id="poems">
+                            <p id="Alicepoem">"My own, my gentle Salmon!</p> 
+                            <p id="Alicepoem">Salmon, come up! Salmon, go down!</p> 
+                            <p id="Alicepoem">Salmon come twist your tail around!</p> 
+                            <p id="Alicepoem">Of all the fishes of the sea</p> 
+                            <p id="Alicepoem">There’s none so good as Salmon!"</p> 
+                            <p id="Alicepoem_final" >———— The Lobster Quadrille from Alice in Wonderland</p>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                        <div>
+                            <img src="./assets/casathanks.png" alt="casa" style="width: 100%;">
+                        </div>
+                        <br>
+                        <div id="tutors">
+                            <div id="Thanks">
+                                <p id="Alicepoem">
+                                Thanks to:</p>
+                                <p id="Alicepoem">
+                                Module Leader: Ollie Ballinger,  Huanfa Chen</p>
+                                <p id="Alicepoem">
+                                Tutors:  Obi Sargoni, Sam Murphy, Andrew Renninger</p>
+                                <p id="Alicepoem">
+                                And all CASA's teachers.</p>
+                            </div>
+                            </div>
+                    
+                            <footer>
+                                <p class="footer-desc"><!-- react-text: 186 -->For more Information,<!-- /react-text -->
+                                    <br><!-- react-text: 188 -->please contact us in Github<!-- /react-text -->
+                                </p><br>
+                                <p><a href="https://github.com/CASA0009-Gentle-Salmon/Gentle_Salmon_web" target="_blank" rel="noopener noreferrer" style="color:white">Code Link</a>
+                                </p>
+                            </footer>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </body>
+    <script>
+        var text1 = "When the population density is low, there will be many stations with large flows. As the population density increases, more medium-flow stations appear in the city center."
+        var text2 = "When there are a few people with one car, many stations with large flows displays in a certain area. As the proportion of owned cars increased, small flow stations appeared."
+        var text3 = "When there are more middle-income people, many stations with large flows appear."
+        var text4 = "When the employment density increases, stations with high flows appear."
+        
+        
+        function handleButtonClick1(){
+            document.getElementById('change').textContent = text1;
+            document.getElementById("Population_Density").style.backgroundColor='#f04c30';
+            document.getElementById("Car_Ownership").style.backgroundColor='#e9e9e9';
+            document.getElementById("Wage").style.backgroundColor='#e9e9e9';
+            document.getElementById("Employment_Density").style.backgroundColor='#e9e9e9';
+        
+            document.getElementById("Population_Density").style.color='white';
+            document.getElementById("Car_Ownership").style.color='black';
+            document.getElementById("Wage").style.color='black';
+            document.getElementById("Employment_Density").style.color='black';
+        }
+        function handleButtonClick2(){
+            document.getElementById('change').textContent = text2;
+            document.getElementById("Population_Density").style.backgroundColor='#e9e9e9';
+            document.getElementById("Car_Ownership").style.backgroundColor='#f04c30';
+            document.getElementById("Wage").style.backgroundColor='#e9e9e9';
+            document.getElementById("Employment_Density").style.backgroundColor='#e9e9e9';
+        
+            document.getElementById("Population_Density").style.color='black';
+            document.getElementById("Car_Ownership").style.color='white';
+            document.getElementById("Wage").style.color='black';
+            document.getElementById("Employment_Density").style.color='black';
+            
+        }
+        function handleButtonClick3(){
+            document.getElementById('change').textContent = text3;
+            document.getElementById("Population_Density").style.backgroundColor='#e9e9e9';
+            document.getElementById("Car_Ownership").style.backgroundColor='#e9e9e9';
+            document.getElementById("Wage").style.backgroundColor='#f04c30';
+            document.getElementById("Employment_Density").style.backgroundColor='#e9e9e9';
+        
+            document.getElementById("Population_Density").style.color='black';
+            document.getElementById("Car_Ownership").style.color='black';
+            document.getElementById("Wage").style.color='white';
+            document.getElementById("Employment_Density").style.color='black';
+        }
+        function handleButtonClick4(){
+            document.getElementById('change').textContent = text4;
+            document.getElementById("Population_Density").style.backgroundColor='#e9e9e9';
+            document.getElementById("Car_Ownership").style.backgroundColor='#e9e9e9';
+            document.getElementById("Wage").style.backgroundColor='#e9e9e9';
+            document.getElementById("Employment_Density").style.backgroundColor='#f04c30';
+        
+            document.getElementById("Population_Density").style.color='black';
+            document.getElementById("Car_Ownership").style.color='black';
+            document.getElementById("Wage").style.color='black';
+            document.getElementById("Employment_Density").style.color='white';
+        }
+        
+        
+        var button = document.getElementById('Population_Density')
+        button.onclick = handleButtonClick1;
+        var button = document.getElementById('Car_Ownership')
+        button.onclick = handleButtonClick2;
+        var button = document.getElementById('Wage')
+        button.onclick = handleButtonClick3;
+        var button = document.getElementById('Employment_Density')
+        button.onclick = handleButtonClick4;
+
+        var text5 = "When flows in stations are high, the number of people with high wages is high. While people with lower wages are usually with medium flows on the outskirts."
+        var text6 = "Comparing with start wage and end wage maps, the end wage map is more scattered, especially for those with medium and low wages. "
+        var text7 = "Many stations with fewer flows are in the city's outskirts, where there are a great number of two-car owners living besides. "
+        var text8 = "This is probably because these areas are too far from the city centre, and have a few sharing-bike stations."
+        var text9 = "People working in the service and office industry are usually with high flows, and they concentrated around the city center."
+        var text10 = "Industrial and retail industries with less flows are located on the edge of the city, because there are relatively fewer stations."
+
+
+
+function handleButtonClick5(){
+    document.getElementById('change2').textContent = text5;
+    document.getElementById('change3').textContent = text6;
+    document.getElementById("Wage2").style.backgroundColor='#f04c30';
+    document.getElementById("Car_Ownership2").style.backgroundColor='#e9e9e9';
+    document.getElementById("Job_Type2").style.backgroundColor='#e9e9e9';
+
+    document.getElementById("Wage2").style.color='white';
+    document.getElementById("Car_Ownership2").style.color='black';
+    document.getElementById("Job_Type2").style.color='black';
+}
+function handleButtonClick6(){
+    document.getElementById('change2').textContent = text7;
+    document.getElementById('change3').textContent = text8;
+    document.getElementById("Wage2").style.backgroundColor='#e9e9e9';
+    document.getElementById("Car_Ownership2").style.backgroundColor='#f04c30';
+    document.getElementById("Wage2").style.backgroundColor='#e9e9e9';
+
+    document.getElementById("Wage2").style.color='black';
+    document.getElementById("Car_Ownership2").style.color='white';
+    document.getElementById("Job_Type2").style.color='black';
+
+    
+}
+function handleButtonClick7(){
+    document.getElementById('change2').textContent = text9;
+    document.getElementById('change3').textContent = text10;
+    document.getElementById("Wage2").style.backgroundColor='#e9e9e9';
+    document.getElementById("Car_Ownership2").style.backgroundColor='#e9e9e9';
+    document.getElementById("Job_Type2").style.backgroundColor='#f04c30';
+
+
+    document.getElementById("Wage2").style.color='black';
+    document.getElementById("Car_Ownership2").style.color='black';
+    document.getElementById("Job_Type2").style.color='white';
+
+}
+
+
+
+var button = document.getElementById('Wage2')
+button.onclick = handleButtonClick5;
+var button = document.getElementById('Car_Ownership2')
+button.onclick = handleButtonClick6;
+var button = document.getElementById('Job_Type2')
+button.onclick = handleButtonClick7;
+
+        
+        </script>
+</html>

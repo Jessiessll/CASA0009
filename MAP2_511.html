@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Free Map</title>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.js'></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.css' rel='stylesheet'/>
+    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js'></script>
+    <script type='text/javascript' src='http://code.jquery.com/jquery-1.10.2.min.js?ver=1.10.2'></script>
+    <link rel='stylesheet'
+          href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css'
+          type='text/css'/>
+          <link rel="stylesheet" media="all" href="/Users/ss/Desktop/term2/09sdcv/assessment/interactive map/font.css" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .map-overlay {
+            position: absolute;
+            opacity:0.8;
+            bottom: 0;
+            right: 0;
+            background: rgb(255, 255, 255);
+            margin-right: 20px;
+            font-family: Arial, sans-serif;
+            overflow: auto;
+            border-radius: 15px;
+            margin: 10px;
+            padding: 10px 20px;
+        }
+
+        #features {
+            top: 0;
+            height: 330px;
+            width: 330px;
+        }
+
+        h1 {
+            font-size: 30px;
+            line-height: 30px;
+            font-weight: bolder;
+            color: #e34a33;
+            font-family: "ny-irvin-1", sans-serif;
+        }
+
+        h2 {
+            font-size: 20px;
+            line-height: 17px;
+            margin-bottom: 10px;
+            font-weight: bolder;
+            color: #494744;
+            font-family: "neutra-2-text-1", sans-serf;
+        }
+
+        h3 {
+            font-size: 8px;
+            line-height: 12px;
+            margin-bottom: 6px;
+            color: #252423
+        }
+
+        h4 {
+            font-size: 10px;
+            line-height: 2px;
+            margin-bottom: 4px;
+            font-weight: bolder;
+            color: #fa5d45
+        }
+
+        h5 {
+            font-size: 20px;
+            line-height: 17px;
+            margin-bottom: 10px;
+            font-weight: bolder;
+            color: #fa5d45;
+            font-family: "neutra-2-text-1", sans-serf;
+        }
+
+        mark{
+            color:#ffffff;
+            background-color: #fa5d45;
+            font-size: 12px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #e34a33;
+        }
+
+        p {
+            font-size: 8px;
+            line-height: 2px;
+            margin-bottom: 4px;
+            color: #494744
+        }
+
+        #console {
+            opacity: 0.9;
+            position: absolute;
+            width: 300px;
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: white;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .session {
+            margin-bottom: 20px;
+        }
+
+        .row {
+            height: 12px;
+            width: 100%;
+        }
+
+        .colors {
+            background: linear-gradient(to right, 
+            #fff5e5,
+            #fbe3c3,
+            #fdcc8a,
+            #f78855,
+            #fa5d45,
+            #f8441b);
+            margin-bottom: 5px;
+        }
+
+        input[type=range] {
+            -webkit-appearance: none;
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 300px;
+            height: 5px;
+            background: #ccc;
+            border: none;
+            border-radius: 3px;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            border: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: #fa5d45;
+            margin-top: -4px;
+        }
+
+        .label {
+            width: 15%;
+            display: inline-block;
+            text-align: center;
+        }
+
+        
+    </style>
+</head>
+<body>
+<div>
+    <div id="map"></div>
+
+    <div class="map-overlay" id="features">
+        <div id="pd"><h5>Hover over a bike station!</h5></div>
+        </div>
+
+    <div id='console'>
+        <h1>Socio-economic Factors</h1>
+        <hr></hr>
+
+        <div class='session'>
+            <h2>Total flows</h2>
+            <div class='row colors'></div>
+        </div>
+
+        <hr></hr>
+
+        <div class='session' id='sliderbar' >
+            <h2>Population density</h2>
+            <h3>Gross population density: </h3><h4><label id='active-population'>2144</label></h4>
+            <input id='slider' class='row' type='range' min='0' max='2144' step='10' value='2144' />
+        </div>
+
+        <!-- <hr></hr>
+        <h2>Balance between the resident workers and jobs</h2>
+        <div class='session' id='sliderbarratio'>
+            <h3>Household Workers per job equilibrium index: </h3><h4><label id='active-ratio'>9</label></h4>
+            <input id='sliderratio' class='row' type='range' min='0' max='9' value='9' />
+        </div> -->
+
+        <hr></hr>
+        <h2>Car ownership</h2>
+        <!-- <div class='session' id='sliderbarv0'>
+            <h3>Zero-car households in CBG: </h3><h4><label id='active-v0'>9</label></h4>
+            <input id='sliderv0' class='row' type='range' min='0' max='9'  value='9' />
+        </div> -->
+
+        <div class='session' id='sliderbarv1'>
+            <h3>One-car households in CBG:</h3><h4> <label id='active-v1'>9</label></h4>
+            <input id='sliderv1' class='row' type='range' min='0' max='9'  value='9' />
+        </div>
+
+        <!-- <div class='session' id='sliderbarv2'>
+            <h3>Two-car households in CBG: </h3><h4><label id='active-v2'>3</label></h4>
+            <input id='sliderv2' class='row' type='range' min='0' max='3'  value='3' />
+        </div> -->
+
+        <hr></hr>
+
+        <h2>Wage</h2>
+        <!-- <div class='session' id='sliderbarlow'>
+            <h3>earning $1250/month or less:</h3><h4><label id='active-low'>1400</label></h4>
+            <input id='sliderlow' class='row' type='range' min='0' max='1400'  value='1400' />
+        </div> -->
+        <div class='session' id='sliderbarmed'>
+            <h3>more than $1250/month but less than $3333/month: </h3><h4><label id='active-med'>2100</label></h4>
+            <input id='slidermed' class='row' type='range' min='0' max='2100'  value='2100' />
+        </div>
+
+        <!-- <div class='session' id='sliderbarhigh'>
+            <h3>more than $3333/month: </h3><h4><label id='active-high'>7500</label></h4>
+            <input id='sliderhigh' class='row' type='range' min='0' max='7500'  value='7500' />
+        </div> -->
+
+        <hr></hr>
+
+        <h2>Employment density</h2>
+        <div class="session" id='sliderbarret' > 
+                <h3>Retail employment density: </h3><h4><label id='active-ret'>900</label></h4>
+                <input id='sliderret' class='row' type='range' min='0' max='700'  value='700' />
+        </div>
+
+        <div class='session' id='sliderbaroff'>
+            <h3>Office employment density: </h3><h4><label id='active-off'>600</label></h4>
+            <input id='slideroff' class='row' type='range' min='0' max='600'  value='600' />
+        </div>
+
+        <div class='session' id='sliderbarind'>
+            <h3>Industrial employment density: </h3><h4><label id='active-ind'>250</label></h4>
+            <input id='sliderind' class='row' type='range' min='0' max='250'  value='250' />
+        </div>
+
+        <div class='session' id='sliderbarsvc'>
+            <h3>Service employment density: </h3><h4><label id='active-svc'>1500</label></h4>
+            <input id='slidersvc' class='row' type='range' min='0' max='1500'  value='1500' />
+        </div>
+
+        <div class='session' id='sliderbarent'>
+            <h3>Entertainment employment density: </h3><h4><label id='active-ent'>900</label></h4>
+            <input id='sliderent' class='row' type='range' min='0' max='900'  value='900' />
+        </div>
+
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+
+// TO MAKE THE MAP APPEAR YOU MUST
+// ADD YOUR ACCESS TOKEN FROM
+// https://account.mapbox.com
+mapboxgl.accessToken = 'pk.eyJ1Ijoidml0YW1pbnllZSIsImEiOiJjbDF2d2puZTgwMzN5M2NvOWo4MTYyeWVyIn0.rB_cXd4XaOhZaoPgPxFW9A';
+const map = new mapboxgl.Map({
+    container: 'map', // container ID
+    style: 'mapbox://styles/vitaminyee/cl2uosh48001314noz0qwvbkw', // style URL
+    scrollZoom: true,
+    center: [-87.67, 41.88], // starting position [lng, lat]
+    zoom: 10.7 // starting zoom
+});
+
+urlstation = 'http://dev.spatialdatacapture.org:8866/data/bikesta';
+    var jsonstation = {stationlist: []};
+    var geojsonstation = {
+        type: "FeatureCollection",
+        features:[],
+    };
+function prepare_station() {
+            $.getJSON(urlstation, function (data) {
+                $.each(data, function (k, v) {
+                    jsonstation.stationlist.push(v);
+            })
+                for (var i = 0; i < jsonstation.stationlist.length; i++) {
+                    geojsonstation.features.push({
+                        "type": "Feature",
+                        "geometry": {
+                            "type": "Point",
+                            "coordinates": [jsonstation.stationlist[i].station_lng, jsonstation.stationlist[i].station_lat]
+                        },
+                        "properties": {
+                            "Unnamed: 0": jsonstation.stationlist[i].pid,
+                            "total_flow": jsonstation.stationlist[i].total_flow,
+                            "station": jsonstation.stationlist[i].station,
+                            "Lowwage": jsonstation.stationlist[i].low_wage,
+                            "Medwage": jsonstation.stationlist[i].med_wage,
+                            "Highwage": jsonstation.stationlist[i].high_wage,
+                            "Pct_AO0": jsonstation.stationlist[i].car_0,
+                            "Pct_AO1": jsonstation.stationlist[i].car_1,
+                            "Pct_AO2p": jsonstation.stationlist[i].car_2,
+                            "D1C5_RET": jsonstation.stationlist[i].retail,
+                            "D1C5_OFF": jsonstation.stationlist[i].office,
+                            "D1C5_IND": jsonstation.stationlist[i].industrial,
+                            "D1C5_SVC": jsonstation.stationlist[i].service,
+                            "D1C5_ENT": jsonstation.stationlist[i].enter,
+                            "D2C_WREMLX": jsonstation.stationlist[i].index,
+                            "D1B": jsonstation.stationlist[i].pop_den,
+                        }
+                    })
+                }
+            });
+        }
+        $(document).ready(function () {
+            prepare_station();
+        });
+        console.log(geojsonstation)
+
+map.addControl(new mapboxgl.NavigationControl(), "bottom-right")
+// map.addControl(new mapboxgl.ScaleControl({
+//     maxWidth: 80,
+//     unit: 'metric'
+// }), "bottom-right")
+
+// function to call once the map has loaded
+map.on('load', function () {
+
+    // add the source to the map styles
+    map.addSource('stations', {
+        type: 'geojson',
+        'data': geojsonstation,
+    });
+
+    // add circle layer
+    map.addLayer({
+        id: 'station_circle_with_dynamic_size_color',
+        type: 'circle',
+        source: 'stations',
+        'layout': {},
+        paint: {
+            'circle-color': {
+                property: 'total_flow',
+                type: 'interval',
+                stops: [
+                    [100, '#fff5e5'],
+                    [1000, '#fbe3c3'],
+                    [5000, '#fdcc8a'],
+                    [8000, '#f78855'],
+                    [15000, '#fa5d45'],
+                    [50000, '#b30000']
+                ],
+                default: "#fff5e5"
+            },
+            'circle-radius': {
+                property: 'total_flow',
+                type: 'interval',
+                stops: [
+                    [100, 3],
+                    [1000, 5],
+                    [5000, 8],
+                    [8000, 12],
+                    [15000, 18],
+                    [50000, 25]
+                ]
+            },
+            'circle-opacity': 0.8,
+            'circle-stroke-width': 0.5,
+            'circle-stroke-color': 'white'
+        }
+    })
+
+    // const geocoder = new MapboxGeocoder({
+    //     // Initialize the geocoder
+    //     accessToken: mapboxgl.accessToken, // Set the access token
+    //     mapboxgl: mapboxgl, // Set the mapbox-gl instance
+    //     marker: false, // Do not use the default marker style
+    //     placeholder: 'Search for places'
+    // });
+
+    // // Add the geocoder to the map
+    // map.addControl(geocoder);
+});
+
+document.getElementById('slider').addEventListener('input', (event) => {
+    const population = parseInt(event.target.value);
+    // update the map
+    map.setFilter('station_circle_with_dynamic_size_color', ['<=', ['number', ['get', 'D1B']], population]);
+
+    // update text in the UI
+    document.getElementById('active-population').innerText = population;
+});
+
+// document.getElementById('sliderratio').addEventListener('input', (event) => {
+//     const ratio = parseInt(event.target.value);
+//     // update the map
+//     map.setFilter('station_circle_with_dynamic_size_color', ['<=', ['number', ['get', 'D2C_WREMLX']], ratio]);
+
+//     // update text in the UI
+//     document.getElementById('active-ratio').innerText = ratio;
+// });
+
+// document.getElementById('sliderv0').addEventListener('input', (event) => {
+//     const v0 = parseInt(event.target.value);
+//     // update the map
+//     map.setFilter('station_circle_with_dynamic_size_color', ['<=', ['number', ['get', 'Pct_AO0']], v0]);
+
+//     // update text in the UI
+//     document.getElementById('active-v0').innerText = v0;
+// });
+
+document.getElementById('sliderv1').addEventListener('input', (event) => {
+    const v1 = parseInt(event.target.value);
+    // update the map
+    map.setFilter('station_circle_with_dynamic_size_color', ['<=', ['number', ['get', 'Pct_AO1']], v1]);
+
+    // update text in the UI
+    document.getElementById('active-v1').innerText = v1;
+});
+
+// document.getElementById('sliderv2').addEventListener('input', (event) => {
+//     const v2 = parseInt(event.target.value);
+//     // update the map
+//     map.setFilter('station_circle_with_dynamic_size_color', ['<=', ['number', ['get', 'Pct_AO2p']], v2]);
+
+//     // update text in the UI
+//     document.getElementById('active-v2').innerText = v2;
+// });
+
+// document.getElementById('sliderlow').addEventListener('input', (event) => {
+//     const low = parseInt(event.target.value);
+//     // update the map
+//     map.setFilter('station_circle_with_dynamic_size_color', ['<=', ['number', ['get', 'Lowwage']], low]);
+
+//     // update text in the UI
+//     document.getElementById('active-low').innerText = low;
+// });
+
+document.getElementById('slidermed').addEventListener('input', (event) => {
+    const med = parseInt(event.target.value);
+    // update the map
+    map.setFilter('station_circle_with_dynamic_size_color', ['<=', ['number', ['get', 'Medwage']], med]);
+
+    // update text in the UI
+    document.getElementById('active-med').innerText = med;
+});
+
+// document.getElementById('sliderhigh').addEventListener('input', (event) => {
+//     const high = parseInt(event.target.value);
+//     // update the map
+//     map.setFilter('station_circle_with_dynamic_size_color', ['<=', ['number', ['get', 'Highwage']], high]);
+
+//     // update text in the UI
+//     document.getElementById('active-high').innerText = high;
+// });
+
+document.getElementById('sliderret').addEventListener('input', (event) => {
+    const ret = parseInt(event.target.value);
+    // update the map
+    map.setFilter('station_circle_with_dynamic_size_color', ['<=', ['number', ['get', 'D1C5_RET']], ret]);
+
+    // update text in the UI
+    document.getElementById('active-ret').innerText = ret;
+});
+
+document.getElementById('slideroff').addEventListener('input', (event) => {
+    const off = parseInt(event.target.value);
+    // update the map
+    map.setFilter('station_circle_with_dynamic_size_color', ['<=', ['number', ['get', 'D1C5_OFF']], off]);
+
+    // update text in the UI
+    document.getElementById('active-off').innerText = off;
+});
+
+document.getElementById('sliderind').addEventListener('input', (event) => {
+    const ind = parseInt(event.target.value);
+    // update the map
+    map.setFilter('station_circle_with_dynamic_size_color', ['<=', ['number', ['get', 'D1C5_IND']], ind]);
+
+    // update text in the UI
+    document.getElementById('active-ind').innerText = ind;
+});
+
+document.getElementById('slidersvc').addEventListener('input', (event) => {
+    const svc = parseInt(event.target.value);
+    // update the map
+    map.setFilter('station_circle_with_dynamic_size_color', ['<=', ['number', ['get', 'D1C5_SVC']], svc]);
+
+    // update text in the UI
+    document.getElementById('active-svc').innerText = svc;
+});
+
+document.getElementById('sliderent').addEventListener('input', (event) => {
+    const ent = parseInt(event.target.value);
+    // update the map
+    map.setFilter('station_circle_with_dynamic_size_color', ['<=', ['number', ['get', 'D1C5_ENT']], ent]);
+
+    // update text in the UI
+    document.getElementById('active-ent').innerText = ent;
+});
+
+
+
+map.on('mousemove', (event) => {
+const bikes = map.queryRenderedFeatures(event.point, {
+layers: ['station_circle_with_dynamic_size_color']
+});
+document.getElementById('pd').innerHTML = bikes.length
+? `<h5>${bikes[0].properties.station}</h5>
+<hr>
+<h3><mark><em><strong>${bikes[0].properties.total_flow}</strong></em></mark>  total flows</h3>
+<hr>
+<h3><mark><em><strong>${bikes[0].properties.D1B}</strong></em></mark>   population density</h3>
+<h3><mark><em><strong>${bikes[0].properties.Pct_AO1}</strong></em></mark>   car ownership</h3>
+<h3><mark><em><strong>${bikes[0].properties.Medwage}</strong></em></mark>   wage</h3>
+<h3><mark><em><strong>${bikes[0].properties.D1C5_RET}</strong></em></mark>   retail employment density</h3>
+<h3><mark><em><strong>${bikes[0].properties.D1C5_OFF}</strong></em></mark>   office employment density</h3>
+<h3><mark><em><strong>${bikes[0].properties.D1C5_IND}</strong></em></mark>   industrial employment density</h3>
+<h3><mark><em><strong>${bikes[0].properties.D1C5_SVC}</strong></em></mark>   service employment density:</h3>
+<h3><mark><em><strong>${bikes[0].properties.D1C5_ENT}</strong></em></mark>   entertainment employment density</h3>`
+: `<h5>Hover over a bike station!</h5>`;
+});
+
+// const popup = new mapboxgl.Popup({
+//         closeButton: false,
+//         closeOnClick: false
+//         });
+
+// map.on('click', 'station_circle_with_dynamic_size_color', (e) => {
+//     // Change the cursor style as a UI indicator.
+//         map.getCanvas().style.cursor = 'default';
+        
+//         // Copy coordinates array.
+//         const coordinates = e.features[0].geometry.coordinates.slice();
+//         const description1 = e.features[0].properties.station;
+//         const description2 = e.features[0].properties.total_flow;
+
+//         while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+//         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+//         }
+            
+//         // Populate the popup and set its coordinates
+//         // based on the feature found.
+//         popup.setLngLat(coordinates)
+//         .setHTML(`<h4>${description1}</h4>
+//         <hr></hr>
+//         <p>total flow: ${description2}</p>`)
+//         .addTo(map);
+//         });
+// map.on('mouseenter', 'station_circle_with_dynamic_size_color', () => {
+//     map.getCanvas().style.cursor = 'default';
+//     });
+ 
+// // Change it back to a pointer when it leaves.
+// map.on('mouseleave', 'station_circle_with_dynamic_size_color', () => {
+//     map.getCanvas().style.cursor = 'default';
+//     });
+
+
+</script>
+</body>
+</html>
